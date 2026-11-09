@@ -1,0 +1,8 @@
+<resources>
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+        <item name="android:windowSplashScreenBackground">#0A1014</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/unscroller_mark</item>
+    </style>
+</resources>

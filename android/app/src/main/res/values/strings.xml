@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">UnScroller</string>
+    <string name="accessibility_service_name">UnScroller Shorts and Reels blocker</string>
+    <string name="accessibility_service_description">Detects YouTube Shorts and Instagram Reels only, then applies your chosen interruption. Screen content is processed on-device and is not stored.</string>
+</resources>
