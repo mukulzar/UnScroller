@@ -4,6 +4,8 @@ import android.accessibilityservice.AccessibilityService
 import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.Context
 import android.content.Intent
+import android.os.Handler
+import android.os.Looper
 import android.view.accessibility.AccessibilityEvent
 import android.view.accessibility.AccessibilityNodeInfo
 import java.util.ArrayDeque
@@ -113,6 +115,17 @@ class ReelBreakAccessibilityService : AccessibilityService() {
       resourceIds.none { it.contains("story_viewer") }
 
   private fun intercept(action: String?, redirectPackage: String?) {
+    if (performGlobalAction(GLOBAL_ACTION_BACK)) {
+      Handler(Looper.getMainLooper()).postDelayed(
+        { performConfiguredAction(action, redirectPackage) },
+        EXIT_SHORTS_DELAY_MS,
+      )
+      return
+    }
+    performConfiguredAction(action, redirectPackage)
+  }
+
+  private fun performConfiguredAction(action: String?, redirectPackage: String?) {
     when (action) {
       "app" -> {
         val launchIntent = redirectPackage
@@ -138,6 +151,7 @@ class ReelBreakAccessibilityService : AccessibilityService() {
   companion object {
     private const val MAX_NODES = 1_500
     private const val INTERCEPT_RETRY_MS = 1_000L
+    private const val EXIT_SHORTS_DELAY_MS = 400L
     private val YOUTUBE_SHORTS_PLAYER_IDS = listOf(
       "reel_player_page_container",
       "reel_player_page_content",
